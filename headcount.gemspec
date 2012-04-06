@@ -13,8 +13,12 @@ Gem::Specification.new do |s|
   s.summary     = "A simple stat collector for rails apps"
   s.description = ""
 
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
-
+  s.rubyforge_project = "headcount"
+  
+  s.files         = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Gemfile", "Gemfile.lock", "Rakefile", "README.rdoc"]
+  s.test_files    = Dir["{spec}/**/*"]
+  s.require_paths = ["lib"]
+  
   s.add_dependency "rails", "~> 3.2.2"
 
   s.add_development_dependency "sqlite3"
