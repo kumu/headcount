@@ -44,11 +44,13 @@ If you'd like to access or reconfigure Headcount outside of the initializer you 
 # Usage
 
 Fire up `rails c` and run:
+
 ```
 Headcount.count # will return current headcount as a hash
 ```
 
 If you'd like to have the results written to disk instead just use the bang version:
+
 ```
 Headcount.count! # will append the results to the output file
 ```
