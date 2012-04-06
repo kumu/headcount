@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Ryan Mohr"]
   s.email       = ["ryan.mohr@gmail.com"]
   s.homepage    = "http://github.com/kumu/headcount"
-  s.summary     = "A simple stat collector for rails apps"
-  s.description = ""
+  s.summary     = "A simple stat collector for rails apps."
+  s.description = "If you can write a query for it, headcount can track it for you."
 
   s.rubyforge_project = "headcount"
   
