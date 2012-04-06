@@ -1,6 +1,7 @@
 Headcount.configure do |config|
   # config.path = 'db/headcounts.json' # where to write headcount to
-
+  config.timestamp = '%'
+  
   now = DateTime.now
   
   count User do

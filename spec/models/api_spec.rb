@@ -44,11 +44,35 @@ describe Headcount do
     end
   end
   
-  describe '.count' do
+  describe '.count' do    
     context 'when called without arguments' do
-      it 'returns the results as a hash' do
+      let(:headcount) do 
         Headcount.register(:users, User)
-        Headcount.count.should eq({:users => User.count})
+        Headcount.count
+      end
+      
+      describe 'result' do
+        it 'is a hash' do
+          headcount.should be_a(Hash)
+        end
+        
+        it 'includes a timestamp' do
+          headcount.should have_key(:timestamp)
+        end
+
+        describe '[:timestamp]' do
+          it 'should be formatted according to configured timestamp format' do
+            timestamp = headcount[:timestamp]
+            time = DateTime.parse(timestamp)
+
+            timestamp.should eq(Headcount::Support.timestamp_for(time))
+          end
+        end
+        
+        it 'includes the current count for each key in the registry' do
+          headcount.should have_key(:users)
+          headcount[:users].should eq(User.count)
+        end
       end
     end
     

@@ -1,7 +1,23 @@
 require 'spec_helper'
 
 describe Headcount::Configuration do
-  let(:config) { Headcount.configure }
+  let(:config) { Headcount.settings }
+  
+  before(:each) do
+    Headcount.reset
+  end
+  
+  describe '#timestamp' do
+    it 'defaults to YYYY-MM-DD HH:MM:SS' do
+      Headcount.settings.timestamp.should eq('%Y-%m-%d %H:%M:%S')
+    end
+  end
+  
+  describe '#path' do
+    it 'defaults to db/headcount.json' do
+      Headcount.settings.path.should eq('db/headcount.json')
+    end
+  end
   
   describe '#count' do
     it 'should return the registration key' do

@@ -3,6 +3,10 @@ require 'headcount/exceptions'
 module Headcount
   module Support
     class << self
+      def timestamp_for(time)
+        time.strftime(Headcount.settings.timestamp)
+      end
+      
       def key_for(query, path = [])
         key = lookup_key(query)
         
@@ -15,12 +19,20 @@ module Headcount
       
       private
       def lookup_key(query)
-        if query < ActiveRecord::Base
-          query.table_name
-        elsif query.is_a?(ActiveRecord::Relation)
-          query.table.name
+        key = nil
+        
+        if query
+          if query < ActiveRecord::Base
+            key = query.table_name
+          elsif query.is_a?(ActiveRecord::Relation)
+            key = query.table.name
+          end
+        end
+        
+        if key
+          key.to_sym
         else
-          raise ArgumentError, "Unable to imply key. Please provide one via :as."
+          raise Headcount::UnsupportedQuery, "Unable to imply key. Please provide one via :as."
         end
       end
     end

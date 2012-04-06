@@ -23,6 +23,8 @@ module Headcount
         count_for(key)
       else
         {}.tap do |headcount|
+          headcount[:timestamp] = Headcount::Support.timestamp_for(DateTime.now)
+          
           @@registry.each do |key, query| # using map would return an array here
             headcount[key] = query.count
           end
@@ -36,7 +38,7 @@ module Headcount
     
     def reset
       reset_registry
-      reset_configuration
+      reset_settings
     end
     
     private

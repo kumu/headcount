@@ -2,10 +2,12 @@ module Headcount
   @@config = nil
   
   class << self
-    def configure(&block)
+    def settings
       @@config ||= Configuration::Base.new
-      @@config.evaluate(&block) if block_given?
-      @@config
+    end
+    
+    def configure(&block)
+      settings.evaluate(&block)
     end
     
     private
@@ -14,17 +16,18 @@ module Headcount
       Headcount::Persistence::File.new(@@config.path, :json)
     end
     
-    def reset_configuration
+    def reset_settings
       @@config = nil
     end
   end
   
   module Configuration
     class Base
-      attr_accessor :path
+      attr_accessor :path, :timestamp
       
       def initialize
-        @path = 'db/headcount.json'
+        @path       = 'db/headcount.json'
+        @timestamp  = '%Y-%m-%d %H:%M:%S'
       end
       
       def evaluate(&block)
