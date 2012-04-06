@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "headcount"
   
-  s.files         = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Gemfile", "Gemfile.lock", "Rakefile", "README.rdoc"]
+  s.files         = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Gemfile", "Gemfile.lock", "Rakefile", "README.md"]
   s.test_files    = Dir["{spec}/**/*"]
   s.require_paths = ["lib"]
   
