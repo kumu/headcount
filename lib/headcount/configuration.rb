@@ -34,17 +34,38 @@ module Headcount
         instance_exec(self, &block)
       end
 
-      def count(query, options = {}, &block)
-        raise UnsupportedQuery, 'query does not respond to :count' unless query.respond_to?(:count)
+      def count(*arguments, &block)
+        if list_given?(*arguments)
+          count_each(arguments.flatten)
+        else
+          query   = arguments[0]
+          options = arguments[1] || {}
+          
+          if query.respond_to?(:count)
+            key = options[:as] || Headcount::Support.key_for(query)
 
-        key = options[:as] || Headcount::Support.key_for(query)
+            # just ignore blocks for now
+            # not really finding a need for nested declarations
+            #if block_given?
+            #  evaluate(&block)
+            #end
 
-        # just ignore blocks for now
-        #if block_given?
-        #  evaluate(&block)
-        #end
-
-        Headcount.register(key, query)
+            Headcount.register(key, query)
+          else
+            raise UnsupportedQuery, 'query does not respond to :count'
+          end
+        end
+      end
+      
+      private
+      def list_given?(*arguments)
+        arguments[0].is_a?(Array) || (arguments.length > 1 && !arguments[1].is_a?(Hash))
+      end
+      
+      def count_each(queries)
+        queries.each do |query|
+          count(query)
+        end
       end
     end
   end

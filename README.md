@@ -33,6 +33,9 @@ Headcount.configure do |config|
   
   # you can specify the key yourself if you'd like to override the default
   count User.active, :as => :active_members
+  
+  # if you're fine with using default keys you can pass a list of queries instead
+  count User, Account
 end
 ```
 
@@ -61,8 +64,8 @@ Your options are open as far as scheduling goes.  If you like [crontab](http://c
 
 You have two options for triggering a headcount.
 
-1. Call `Headcount.count!` directly
-2. Use `rake headcount`
+1. Call it directly: `Headcount.count!`
+2. Use the rake task: `rake headcount`
 
 In the future I may write a daemon to simplify the scheduling process with an upstart script to boot, but for now you're on your own.
 
