@@ -63,3 +63,7 @@ You have two options for triggering a headcount.
 2. Use `rake headcount`
 
 In the future I may write a daemon to simplify the scheduling process with an upstart script to boot, but for now you're on your own.
+
+# Credit
+
+Headcount was created for use at Kumu (http://kumupowered.com)
