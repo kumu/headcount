@@ -28,10 +28,11 @@ Headcount.configure do |config|
   config.timestamp  = ''                  # default (YYYY-MM-DD HH:MM:SS)
   
   # by default Headcount will use the underlying table name for the key
-  count User              # implicit :users key
-  count User.where(:active => true)
+  count User                          # :users key implied
+  count User.where(:active => true)   # will also use implied :users key
+  
   # you can specify the key yourself if you'd like to override the default
-  count User, :as => :members
+  count User.active, :as => :active_members
 end
 ```
 
@@ -58,7 +59,7 @@ Your options are open as far as scheduling goes.  If you like [crontab](http://c
 
 You have two options for triggering a headcount.
 
-1) Call `Headcount.count!` directly
-2) Use `rake headcount`
+1. Call `Headcount.count!` directly
+2. Use `rake headcount`
 
 In the future I may write a daemon to simplify the scheduling process with an upstart script to boot, but for now you're on your own.

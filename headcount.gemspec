@@ -15,8 +15,8 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "headcount"
   
-  s.files         = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Gemfile", "Gemfile.lock", "Rakefile", "README.md"]
-  s.test_files    = Dir["{spec}/**/*"]
+  s.files         = Dir["{lib}/**/*"] + ["MIT-LICENSE", "Gemfile", "Gemfile.lock", "Rakefile", "README.md", "CHANGELOG.md"]
+  # s.test_files    = Dir["{spec}/**/*"] # don't force everyone to also have to download the tests and dummy app
   s.require_paths = ["lib"]
   
   s.add_dependency "rails", "~> 3.2.2"
