@@ -25,7 +25,7 @@ Configure Headcount through a rails initializer.  Here's an example:
 # config/initializers/headcount.rb
 Headcount.configure do |config|
   config.path       = 'db/headcount.json' # default
-  config.timestamp  = ''                  # default (YYYY-MM-DD HH:MM:SS)
+  config.timestamp  = '%Y-%m-%d %H:%M:%S' # default (YYYY-MM-DD HH:MM:SS)
   
   # by default Headcount will use the underlying table name for the key
   count User                          # :users key implied
