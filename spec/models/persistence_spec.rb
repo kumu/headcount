@@ -25,9 +25,16 @@ describe Headcount do
         Headcount.count!
       end
       
-      File.open(PATH, 'r') do |file|
-        file.readlines.should have(3).items
-      end
+      File.readlines(PATH).should have(3).items
+    end
+  end
+  
+  describe '.seed!' do
+    it 'writes the headcounts to disk' do
+      Headcount.seed!(3.days.ago, 1.day)
+      
+      File.exists?(PATH).should be_true
+      File.readlines(PATH).should have(4).items
     end
   end
 end

@@ -58,6 +58,23 @@ If you'd like to have the results written to disk instead just use the bang vers
 Headcount.count! # will append the results to the output file
 ```
 
+## Seeding
+
+If you have a history of data that you'd like to generate headcounts you can give the `seed` method a try.
+
+**Notice** For seeding to work your queries must respond to `where` and the underlying table must have a `created_at` column. If resulting historical query is invalid, the headcount will just fall back to the original query.
+
+```
+Headcount.seed(2.years.ago, 1.day) # preview the historical headcounts
+```
+
+If you're happy with the data, simply call the bang version to write it to disk:
+
+```
+Headcount.seed!(2.years.ago, 1.day) # WARNING: this will overwrite any existing data
+```
+
+
 ## Scheduling
 
 Your options are open as far as scheduling goes.  If you like [crontab](http://crontab.org/), use crontab. If you prefer [clockwork](https://github.com/tomykaira/clockwork), use clockwork. 

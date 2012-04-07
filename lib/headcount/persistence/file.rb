@@ -6,9 +6,13 @@ module Headcount
         @format = format
       end
       
-      def save(headcount)
+      def save(headcounts, options = {})
+        ::File.delete(@path) if ::File.exists?(@path) if options[:reset]
+          
         ::File.open(@path, 'a') do |file|
-          file.puts headcount.to_json
+          headcounts.each do |headcount|
+            file.puts headcount.to_json
+          end
         end
       end
     end
