@@ -77,14 +77,34 @@ Headcount.seed!(2.years.ago, 1.day) # WARNING: this will overwrite any existing 
 
 ## Scheduling
 
-Your options are open as far as scheduling goes.  If you like [crontab](http://crontab.org/), use crontab. If you prefer [clockwork](https://github.com/tomykaira/clockwork), use clockwork. 
+Your options are open as far as scheduling goes.  If you like crontab, use [crontab](http://crontab.org/) or [whenever](https://github.com/javan/whenever). If you prefer something else, give [clockwork](https://github.com/tomykaira/clockwork) a shot.
 
 You have two options for triggering a headcount.
 
 1. Call it directly: `Headcount.count!`
-2. Use the rake task: `rake headcount`
+2. Use the rake task: `rake headcount` (executes headcount via `script/rails runner`)
 
 In the future I may write a daemon to simplify the scheduling process with an upstart script to boot, but for now you're on your own.
+
+### Crontab example
+
+```
+# run daily at midnight
+0 0 * * * bash --login -c 'cd [YOUR RAILS APP DIR] && script/rails runner -e production "Headcount.count!"'
+```
+
+### Whenever example
+
+```
+# schedule.rb
+every 1.day do
+  runner "Headcount.count!"
+end
+```
+
+### Clockwork example
+
+TODO
 
 # Credit
 

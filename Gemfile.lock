@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    headcount (0.6.0)
+    headcount (0.7.0)
       rails (~> 3.2.2)
 
 GEM
